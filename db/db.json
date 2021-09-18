@@ -4,11 +4,6 @@
       "id": 1,
       "title": "buy bread",
       "completed": true
-    },
-    {
-      "title": "buy milk",
-      "completed": true,
-      "id": 2
     }
   ]
 }

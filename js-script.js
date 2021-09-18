@@ -7,12 +7,17 @@ async function getTodos() {
     let todosArray = await todos.json();
 
     todoList.innerHTML = todosArray.map(function (obj) {
-        if (obj.completed === false) {
-            return `<li class="in-progress" data-id="${obj.id}" data-title="${obj.title}" data-complited="${obj.completed}">${obj.title}<button type="submit" id="delete">delete</button></li>`
-        } else {
-            return `<li class="confirmed" data-id="${obj.id}" data-title="${obj.title}" data-complited="${obj.completed}">${obj.title}<button type="submit" id="delete">delete</button></li>`
-        }
+        // if (obj.completed === false) {
+        //     return `<li class="in-progress" data-id="${obj.id}" data-title="${obj.title}" data-complited="${obj.completed}">${obj.title}<button type="submit" id="delete">delete</button></li>`
+        // } else {
+        //     return `<li class="confirmed" data-id="${obj.id}" data-title="${obj.title}" data-complited="${obj.completed}">${obj.title}<button type="submit" id="delete">delete</button></li>`
+        // }
+        let status = obj.completed === false ? "in-progress" : "confirmed"
+        return `<li class="${status}" data-id="${obj.id}" data-title="${obj.title}" data-complited="${obj.completed}">${obj.title}<button type="submit" id="delete">delete</button></li>`
+
     }).join('');
+
+
 
 };
 getTodos();
@@ -36,9 +41,10 @@ create.addEventListener('click', async function addTodo(e) {
 
     let newTodoArray = await newTodo.json();
     console.log(newTodoArray)
-    todoList.innerHTML += `<li class="in-progress" data-id="${newTodoArray.id}" data-title="${newTodoArray.title}"  
-    data-complited="${newTodoArray.completed = false}">${newTodoArray.title}<button type="submit" id="delete">delete</button></li>`;
+    // todoList.innerHTML += `<li class="in-progress" data-id="${newTodoArray.id}" data-title="${newTodoArray.title}"  
+    // data-complited="${newTodoArray.completed = false}">${newTodoArray.title}<button type="submit" id="delete">delete</button></li>`;
     input.value = ' '
+    getTodos();
 
 })
 
@@ -59,11 +65,11 @@ todoList.addEventListener('click', async function changeTodoList(e) {
 
         let changedToDo = await changeToDo.json();
         e.target.classList.add('confirmed')
-        console.log(changedToDo)
+        // console.log(changedToDo)
     }
 })
 
-let del = document.getElementById('delete')
+// let del = document.getElementById('delete')
 todoList.addEventListener('click', async function deleteTodo(e) {
     if (e.target.tagName === 'BUTTON') {
         let elemId = e.target.closest('li').getAttribute('data-id')
