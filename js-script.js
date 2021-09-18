@@ -79,5 +79,4 @@ todoList.addEventListener('click', async function deleteTodo(e) {
 
     }
     getTodos();
-
 })
